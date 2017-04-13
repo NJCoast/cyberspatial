@@ -1,0 +1,17 @@
+version: '2'
+services:
+  postgres:
+    image: postgres
+  web:
+    build:
+      context: .
+      dockerfile: ./docker_compose/django/development/Dockerfile
+    command: /start.sh
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    links:
+      - postgres

@@ -1,0 +1,36 @@
+# virtual environments
+venv
+
+# Python files
+*.pyc
+__pycache__
+.pythonversion
+
+# Python Notebook dot files
+.ipynb*
+
+# Secret environment settings
+.env
+env
+
+# Ignore vim tags file
+tags
+
+# Node and Webpack files
+node_modules
+npm-debug.log
+webpack-stats*
+
+# Static assests
+staticfiles
+static_cdn
+media_cdn
+
+# Ignore sqlite
+db.sqlite3
+
+# Ignore Selenium geckodriver
+geckodriver.log
+
+# Apple files
+.DS_Store
