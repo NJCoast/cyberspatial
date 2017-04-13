@@ -1,0 +1,10 @@
+# Django
+Django==1.8.7
+
+# Configuration
+dj-database-url==0.4.2
+python-decouple==3.0
+whitenoise==3.3.0
+
+# database
+psycopg2
