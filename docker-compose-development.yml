@@ -13,5 +13,18 @@ services:
       - "8000:8000"
     depends_on:
       - postgres
+      - geoserver
     links:
       - postgres
+      - geoserver
+
+  geoserver:
+    build:
+      context: .
+      dockerfile: ./docker_compose/geoserver/Dockerfile
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
