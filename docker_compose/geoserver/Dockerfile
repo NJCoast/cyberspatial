@@ -1,1 +1,1 @@
-FROM geonode/geoserver:latest
+FROM geonode/geoserver:alias
