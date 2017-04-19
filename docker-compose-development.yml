@@ -20,6 +20,8 @@ services:
     links:
       - postgres
       - geoserver
+    env_file:
+      - ./scripts/docker/env/production/django.env
 
   geoserver:
     build:
@@ -29,5 +31,20 @@ services:
       - postgres
     depends_on:
       - postgres
+    volumes_from:
+      - data_dir_conf
     ports:
       - "8080:8080"
+    env_file:
+      - ./scripts/docker/env/production/geoserver.env
+
+  data_dir_conf:
+    image: geonode/geoserver_data:2.9.x-oauth2
+    container_name: geoserver_data_dir
+    command: /bin/true
+    volumes:
+      - /geoserver_data/data
+
+volumes:
+
+  geoserver_data_dir:
