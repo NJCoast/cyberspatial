@@ -1,10 +1,7 @@
 version: '2'
 services:
   postgres:
-    build:
-      context: .
-      dockerfile: ./docker_compose/postgis/Dockerfile
-
+    image: postgres
   web:
     build:
       context: .

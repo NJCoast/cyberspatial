@@ -1,1 +1,1 @@
-FROM kartoza/postgis:9.5-2.2
+FROM mdillon/postgis:latest
