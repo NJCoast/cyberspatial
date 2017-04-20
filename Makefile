@@ -8,10 +8,10 @@ build:
 
 sync: up
 	# set up the database tablea
-	docker-compose exec web django-admin.py migrate --noinput
-	docker-compose exec web django-admin.py loaddata sample_admin
-	docker-compose exec web django-admin.py loaddata /usr/local/src/geonode/geonode/base/fixtures/default_oauth_apps_docker.json
-	docker-compose exec web django-admin.py loaddata /usr/local/src/geonode/geonode/base/fixtures/initial_data.json
+	docker-compose exec django /app/manage.py migrate --noinput
+	docker-compose exec django /app/manage.py loaddata sample_admin
+	docker-compose exec django /app/manage.py loaddata /usr/local/src/geonode/geonode/base/fixtures/default_oauth_apps_docker.json
+	docker-compose exec django /app/manage.py loaddata /usr/local/src/geonode/geonode/base/fixtures/initial_data.json
 
 migrate:
 	django-admin.py migrate --noinput

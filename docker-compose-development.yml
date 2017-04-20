@@ -5,11 +5,11 @@ services:
       context: .
       dockerfile: ./docker_compose/postgis/Dockerfile
 
-  web:
+  django:
     build:
       context: .
       dockerfile: ./docker_compose/django/development/Dockerfile
-    command: /app/manage.py runserver 0.0.0.0:8000
+    command: django-admin.py runserver 0.0.0.0:8000 --settings=geonode.settings
     volumes:
       - .:/app
     ports:
@@ -21,10 +21,12 @@ services:
       - postgres
       - geoserver
     env_file:
-      - ./scripts/docker/env/production/django.env
+      - ./scripts/docker/env/development/django.env
 
   geoserver:
-    image: geoserver
+    build:
+      context: .
+      dockerfile: ./docker_compose/geoserver/Dockerfile
     links:
       - postgres
     depends_on:
@@ -34,7 +36,7 @@ services:
     ports:
       - "8080:8080"
     env_file:
-      - ./scripts/docker/env/production/geoserver.env
+      - ./scripts/docker/env/development/geoserver.env
 
   data_dir_conf:
     image: geonode/geoserver_data:2.9.x-oauth2
