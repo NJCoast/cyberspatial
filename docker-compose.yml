@@ -14,12 +14,10 @@ services:
   django:
     build:
       context: .
-      dockerfile: ./docker_compose/django/development/Dockerfile
-    command: /app/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/app
+      dockerfile: ./docker_compose/django/production/Dockerfile
     ports:
       - "8000:8000"
+    command: /start.sh
     depends_on:
       - postgres
       - geoserver
