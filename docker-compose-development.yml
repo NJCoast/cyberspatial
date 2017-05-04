@@ -3,12 +3,12 @@ services:
   postgres:
     build:
       context: .
-      dockerfile: ./docker_compose/postgis/Dockerfile
+      dockerfile: ./dockerfiles/postgis/Dockerfile
 
   django:
     build:
       context: .
-      dockerfile: ./docker_compose/django/development/Dockerfile
+      dockerfile: ./dockerfiles/django/development/Dockerfile
     command: django-admin.py runserver 0.0.0.0:8000 --settings=geonode.settings
     volumes:
       - .:/app
@@ -26,7 +26,7 @@ services:
   geoserver:
     build:
       context: .
-      dockerfile: ./docker_compose/geoserver/Dockerfile
+      dockerfile: ./dockerfiles/geoserver/Dockerfile
     links:
       - postgres
     depends_on:
