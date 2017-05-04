@@ -33,7 +33,7 @@ gcloud container clusters delete njcoast
 ```
 
 After the cluster is spun up, you should have assess to the Kubernetes deployment using kubectl. The main CLI to interact with the Kubernetes cluster will be kubectl. At first, the only existing Service should be Kubernetes, and you shouldn’t have any pods.
-````bash
+```bash
 $ kubectl get services
 $ kubectl get pods
 ```
