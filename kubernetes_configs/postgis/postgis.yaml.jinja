@@ -75,7 +75,7 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/postgres-pw
+        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/postgis-pw
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5432
