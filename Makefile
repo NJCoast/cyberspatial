@@ -20,7 +20,7 @@ MIN=2
 MAX=15
 TARGET=50
 DEPLOYMENT=njcoast
-GUESTBOOK_POD_NAME=$(shell kubectl get pods | grep guestbook -m 1 | awk '{print $$1}' )
+CYBERSPATIAL_POD_NAME=$(shell kubectl get pods | grep cyberspatial -m 1 | awk '{print $$1}' )
 
 .PHONY: all
 all: deploy
@@ -40,19 +40,19 @@ create-bucket:
 .PHONY: template
 template:
 	# Minikube templates
-#	jinja2 kubernetes_configs/guestbook/guestbook.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/guestbook/guestbook_minikube.yaml
+	jinja2 kubernetes_configs/cyberspatial/cyberspatial.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/cyberspatial/cyberspatial_minikube.yaml
 	jinja2 kubernetes_configs/postgis/postgis.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/postgis/postgis_minikube.yaml
 	# GKE templates
-#	jinja2 kubernetes_configs/guestbook/guestbook.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/guestbook/guestbook_gke.yaml
+	jinja2 kubernetes_configs/cyberspatial/cyberspatial.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/cyberspatial/cyberspatial_gke.yaml
 	jinja2 kubernetes_configs/postgis/postgis.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/postgis/postgis_gke.yaml
 
 .PHONY: deploy
 deploy: push template
-	kubectl apply -f kubernetes_config/guestbook/guestbook-gke.yaml
+	kubectl apply -f kubernetes_config/cyberspatial/cyberspatial-gke.yaml
 
 .PHONY: update
 update:
-	kubectl rolling-update frontend --image=gcr.io/${GOOGLE_CLOUD_PROJECT}/guestbook:latest
+	kubectl rolling-update frontend --image=gcr.io/${GOOGLE_CLOUD_PROJECT}/cyberspatial:latest
 
 .PHONY: disk
 disk:
@@ -74,7 +74,7 @@ autoscale-on:
 
 .PHONY: migrations
 migrations:
-	kubectl exec $(GUESTBOOK_POD_NAME) -- python /app/manage.py migrate
+	kubectl exec $(CYBERSPATIAL_POD_NAME) -- python /app/manage.py migrate
 
 .PHONY: delete
 delete:
