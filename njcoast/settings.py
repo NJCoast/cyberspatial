@@ -25,13 +25,13 @@ from geonode.settings import *
 # General Django development settings
 #
 
-SITENAME = 'njdca'
+SITENAME = 'njcoast'
 
 # Defines the directory that contains the settings file as the LOCAL_ROOT
 # It is used for relative settings elsewhere.
 LOCAL_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-WSGI_APPLICATION = "njdca.wsgi.application"
+WSGI_APPLICATION = "njcoast.wsgi.application"
 
 
 # Load more settings from a file called local_settings.py if it exists
@@ -47,7 +47,7 @@ STATICFILES_DIRS.append(
 
 
 # Location of url mappings
-ROOT_URLCONF = 'njdca.urls'
+ROOT_URLCONF = 'njcoast.urls'
 
 # Location of locale files
 LOCALE_PATHS = (

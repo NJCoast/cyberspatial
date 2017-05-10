@@ -1,0 +1,78 @@
+# Copyright 2015 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cyberspatial
+  labels:
+    name: cyberspatial
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: cyberspatial
+    spec:
+      containers:
+      - name: cyberspatial
+        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/cyberspatial:{{- cyberspatial_tag -}}
+        {% if minikube %}
+        imagePullPolicy: IfNotPresent
+       {%- endif %}
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+        {% if has_db -%}
+        - name: secrets
+          mountPath: /etc/secrets
+          readOnly: true
+        {%- endif -%}
+      {% if hot_reload %}
+        - name: reload
+          mountPath: /app
+      {%- endif %}
+      volumes:
+      {%- if has_db %}
+      - name: secrets
+        secret:
+          secretName: db-passwords
+      {% endif %}
+      {%-if hot_reload -%}
+      - name: reload
+        hostPath:
+          path: {{ hotreload_directory }}
+      {% endif %}
+---
+
+# The polls service provides a load-balancing proxy over the polls app
+# pods. By specifying the type as a 'LoadBalancer', Container Engine will
+# create an external HTTP load balancer.
+# For more information about Services see:
+#   https://cloud.google.com/container-engine/docs/services/
+# For more information about external HTTP load balancing see:
+#   https://cloud.google.com/container-engine/docs/load-balancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: cyberspatial
+  labels:
+    name: cyberspatial
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    name: cyberspatial

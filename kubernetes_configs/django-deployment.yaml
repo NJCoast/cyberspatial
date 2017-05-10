@@ -16,7 +16,7 @@ spec:
         - name: DATABASE_URL
           value: postgres://postgres:postgres@postgres:5432/postgres
         - name: DJANGO_SETTINGS_MODULE
-          value: njdca.settings
+          value: njcoast.settings
         - name: ALLOWED_HOSTS
           value: '[''django'',]'
         - name: C_FORCE_ROOT
