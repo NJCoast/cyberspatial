@@ -78,7 +78,7 @@ $ kubectl config use-context minikube # Minikube context
 Docker-compose handles building of the frontend containers. But to push to kubernetes or to google clouds private repository, we need to build the container with specific tags. From the root directory.
 
 ```bash
-$ docker build -t njcoast/cyberspatial ./docker_compose/django/production/
+$ docker build -t njcoast/cyberspatial ./dockerfiles/django/production/
 ```
 
 Once you’ve replaced the image attribute with the Docker image you pushed, let’s create the Service and Replication Controller:
