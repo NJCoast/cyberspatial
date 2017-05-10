@@ -32,7 +32,7 @@ spec:
         imagePullPolicy: IfNotPresent
        {%- endif %}
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
         volumeMounts:
         {% if has_db -%}
         - name: secrets
