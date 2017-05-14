@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: geoserver
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: geoserver
+    spec:
+      containers:
+      - env:
+        - name: DOCKER_HOST
+        - name: PUBLIC_PORT
+          value: {{ public_port }}
+        - name: DOCKER_HOST_IP
+        - name: DJANGO_URL
+          value: {{ django_url }}
+        - name: GEOSERVER_PUBLIC_LOCATION
+          value:{{ geoserver_public_location }}
+        - name: GEOSERVER_LOCATION
+          value: {{ geoserver_location }}
+        - name: GEOSERVER_DATA_DIR
+          value: {{ geoserver_data_dir }}
+        - name: SITEURL
+          value:{{ siteurl }}
+        name: geoserver
+        ports:
+        - containerPort: 8080
+        resources: {}
+      restartPolicy: Always
+status: {}

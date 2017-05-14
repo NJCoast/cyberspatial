@@ -1,9 +1,17 @@
 {
-  "GOOGLE_CLOUD_PROJECT" : "utopian-pact-123818",
+  "GOOGLE_CLOUD_PROJECT": "utopian-pact-123818",
   "minikube": null,
   "guestbook_tag": "v9",
   "base64_db_pw": "bXlzZWNyZXRwYXNzd29yZAo=",
   "gce_disk_name": "pg_data",
   "has_db": "True",
-  "hot_reload": null
+  "hot_reload": null,
+  "database_url": "postgres://postgres:postgres@postgres:5432/postgres",
+  "django_settings_module": "njcoast.settings",
+  "allowed_hosts": "django",
+  "c_force_root": "1",
+  "geoserver_public_location": "http://geonode/geoserver",
+  "geoserver_location": "http://geonode/geoserver",
+  "siteurl": "http://geonode",
+  "geoserver_data_dir": "/geoserver_data/data"
 }
