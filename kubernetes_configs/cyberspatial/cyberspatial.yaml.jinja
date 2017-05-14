@@ -38,7 +38,7 @@ spec:
           - name: DJANGO_SETTINGS_MODULE
             value: {{ django_settings_module }}
           - name: ALLOWED_HOSTS
-            value: {{ allowed_hosts }}
+            value: ['{{ allowed_hosts }}',]
           - name: C_FORCE_ROOT
             value: {{ c_force_root }}
           - name: GEOSERVER_PUBLIC_LOCATION
