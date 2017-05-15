@@ -20,7 +20,7 @@ MIN=2
 MAX=15
 TARGET=50
 DEPLOYMENT=njcoast
-CYBERSPATIAL_POD_NAME=$(shell kubectl get pods | grep cyberspatial -m 1 | awk '{print $$1}' )
+CYBERSPATIAL_POD_NAME=$(shell kubectl get pods | grep django -m 1 | awk '{print $$1}')
 
 .PHONY: all
 all: deploy
@@ -83,7 +83,10 @@ autoscale-on:
 
 .PHONY: migrations
 migrations:
-	kubectl exec $(CYBERSPATIAL_POD_NAME) -- python /app/manage.py migrate
+	kubectl exec $(CYBERSPATIAL_POD_NAME) -- /app/manage.py migrate --noinput
+	kubectl exec $(CYBERSPATIAL_POD_NAME) -- /app/manage.py loaddata sample_admin
+	kubectl exec $(CYBERSPATIAL_POD_NAME) -- /app/manage.py loaddata /usr/local/src/geonode/geonode/base/fixtures/default_oauth_apps_docker.json
+	kubectl exec $(CYBERSPATIAL_POD_NAME) -- /app/manage.py loaddata /usr/local/src/geonode/geonode/base/fixtures/initial_data.json
 
 .PHONY: delete
 delete:
