@@ -65,16 +65,16 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: postgres
+  name: postgis
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-         name: postgres
+         name: postgis
     spec:
       containers:
-      - name: postgres
+      - name: postgis
         image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/postgis-pw
         imagePullPolicy: IfNotPresent
         ports:
@@ -94,7 +94,7 @@ spec:
           secretName: db-passwords
 ---
 metadata:
- name: postgres
+ name: postgis
 kind: Service
 apiVersion: v1
 spec:

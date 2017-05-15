@@ -12,22 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License
 
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: cyberspatial
-  labels:
-    name: cyberspatial
+  name: django
+  labels
+    name: django
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: cyberspatial
+        name: django
     spec:
       containers:
-      - name: cyberspatial
-        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/cyberspatial:{{- cyberspatial_tag -}}
+      - name: django
+        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/django:{{- django_tag -}}
         {% if minikube %}
         imagePullPolicy: IfNotPresent
        {%- endif %}
@@ -82,13 +83,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cyberspatial
+  name: django
   labels:
-    name: cyberspatial
+    name: django
 spec:
   type: LoadBalancer
   ports:
   - port: 80
     targetPort: 8000
   selector:
-    name: cyberspatial
+    name: django
