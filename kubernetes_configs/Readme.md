@@ -42,27 +42,49 @@ $ kubectl get pods
 ## Kubernetes on local mac environment
 For debugging purposes, it is sometimes easier to test in a local mikikube Kubernetes environment. There is an updated [blog post](https://medium.com/google-cloud/local-django-on-kubernetes-with-minikube-89f5ad100378) that describes how to deploy to straight Kubernetes instead of Google Cloud. To install the environment, I turned off docker for mac to be safe. In principle, docker will try socket file first, the env, so both should be able to coexist.
 
-Get docker machine going with xhyve (built in mac) virtualization.
+
+On MacOS to use the xhyve driver for minikube, docker-machine-driver-xhyve. Homebrew has it in formulas.
 ```bash
-docker-machine create --driver xhyve xhyve-test
-docker-machine env xhyve-test
-eval $(docker-machine env xhyve-test)
+$ brew install docker-machine-driver-xhyve --HEAD
+```
+
+Permissions for the driver will need to be set to root to work correctly:
+```bash
+$ sudo chown root:wheel /usr/local/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+$ sudo chmod u+s /usr/local/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
 ```
 
 Start minicube with docker environment and the xhyve driver (otherwise it trys to grab virtualbox base box instead).
 ```bash
-minikube start --docker-env eval $(docker-machine env xhyve-test) --vm-driver=xhyve
+$ minikube start --vm-driver=xhyve
 ```
+There is a [bug](https://github.com/kubernetes/minikube/issues/1400) with mikikube that seems to be fixed if you change the permissions again after a minikube stop command.
+```bash
+$ sudo chown root:wheel /usr/local/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+$ sudo chmod u+s /usr/local/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+```
+
+
 
 You can set this permanently with:
 ```bash
 $ minikube config set vm-driver=xhyve
 ```
 
+If you are running the docker for mac system, docker will be pointed to this vm by default. To connect to the minikube docker environment to build containers use:
+
+```bash
+$ eval $(minikube docker-env)
+```
+
+The entire minikube (docker-machine) environment can be printed using:
+```bash
+$ minikube docker-env
+```
 
 Run sample project. Kubectl should work as normal after this using env variables.
 ```bash
-kubectl run hello-minikube --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+$ kubectl run hello-minikube --image=gcr.io/google_containers/echoserver:1.4 --port=8080
 ```
 
 

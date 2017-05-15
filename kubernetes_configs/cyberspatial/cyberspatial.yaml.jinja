@@ -12,25 +12,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License
 
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: cyberspatial
-  labels:
-    name: cyberspatial
+  name: django
+  labels
+    name: django
 spec:
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
-        name: cyberspatial
+        name: django
     spec:
       containers:
-      - name: cyberspatial
-        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/cyberspatial:{{- cyberspatial_tag -}}
+      - name: django
+        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/django:{{- django_tag -}}
         {% if minikube %}
         imagePullPolicy: IfNotPresent
        {%- endif %}
+        command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+      - env:
+          - name: DATABASE_URL
+            value: {{ database_url }}
+          - name: DJANGO_SETTINGS_MODULE
+            value: {{ django_settings_module }}
+          - name: ALLOWED_HOSTS
+            value: ['{{ allowed_hosts }}',]
+          - name: C_FORCE_ROOT
+            value: {{ c_force_root }}
+          - name: GEOSERVER_PUBLIC_LOCATION
+            value: {{ geoserver_public_location }}
+          - name: GEOSERVER_LOCATION
+            value: {{ geoserver_location }}
+          - name: SITEURL
+            value: {{ siteurl }}
         ports:
         - containerPort: 8000
         volumeMounts:
@@ -66,13 +83,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cyberspatial
+  name: django
   labels:
-    name: cyberspatial
+    name: django
 spec:
   type: LoadBalancer
   ports:
   - port: 80
-    targetPort: 8080
+    targetPort: 8000
   selector:
-    name: cyberspatial
+    name: django

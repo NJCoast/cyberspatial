@@ -15,18 +15,18 @@
 # Template file modified from example code:
 # https://github.com/waprin/kubernetes_django_postgres_redis
 
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: db-passwords
-data:
-  djangouserpw: {{ base64_db_pw }}
+#---
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  name: db-passwords
+#data:
+#  djangouserpw: {{ base64_db_pw }}
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgres-data
+  name: geoserver-data
 spec:
   accessModes:
     - ReadWriteOnce
@@ -38,19 +38,19 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
- name: pv0001
+ name: pv0002
 spec:
  accessModes:
    - ReadWriteOnce
  capacity:
    storage: 5Gi
  hostPath:
-   path: /data/pv0001/
+   path: /data/pv0002
 {% else -%}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv0001
+  name: pv0002
 spec:
   accessModes:
     - ReadWriteOnce
@@ -65,43 +65,56 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: postgis
+  name: geoserver
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-         name: postgis
+         name: geoserver
     spec:
       containers:
-      - name: postgis
-        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/postgis-pw
+      - name: geoserver
+        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/geoserver
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 5432
+        - containerPort: 8080
+        env:
+        - name: PUBLIC_PORT
+          value: "80"
+        - name: DJANGO_URL
+          value: http://django:8000/
+        - name: GEOSERVER_PUBLIC_LOCATION
+          value: http://geonode/geoserver/
+        - name: GEOSERVER_LOCATION
+          value: http://geoserver:8080/geoserver/
+        - name: GEOSERVER_DATA_DIR
+          value: /geoserver_data/data
+        - name: SITEURL
+          value: http://geonode/
         volumeMounts:
-        - name: postgresdata
-          mountPath: /usr/local/var/postgres
+        - name: geoserverdata
+          mountPath: /geoserver_data/data
         - name: secrets
           mountPath: /etc/secrets
           readOnly: true
       volumes:
-      - name: postgresdata
+      - name: geoserverdata
         persistentVolumeClaim:
-          claimName: postgres-data
+          claimName: geoserver-data
       - name: secrets
         secret:
           secretName: db-passwords
 ---
 metadata:
- name: postgis
+ name: geoserver
 kind: Service
 apiVersion: v1
 spec:
   ports:
-  - name: postgres
+  - name: geoserver
     protocol: TCP
-    port: 5432
-    targetPort: 5432
+    port: 8080
+    targetPort: 8080
   selector:
-    name: postgres
+    name: geoserver

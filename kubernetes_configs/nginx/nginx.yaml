@@ -1,0 +1,38 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: nginx
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: nginx
+    spec:
+      containers:
+        - image: geonode/nginx:geoserver
+          name: cyberspatial
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+status: {}
+
+---
+metadata:
+  labels:
+    io.kompose.service: nginx
+kind: Service
+apiVersion: v1
+spec:
+  ports:
+    - name: nginx
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    name: nginx

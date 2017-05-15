@@ -25,6 +25,13 @@ CYBERSPATIAL_POD_NAME=$(shell kubectl get pods | grep cyberspatial -m 1 | awk '{
 .PHONY: all
 all: deploy
 
+
+.PHONY: build-containers
+build-containers:
+	make -f ./dockerfiles/postgis/Makefile build
+	make -f ./dockerfiles/geoserver/Makefile build
+	make -f ./dockerfiles/django/production/Makefile build
+
 .PHONY: create-cluster
 create-cluster:
 	gcloud container clusters create njcoast \
@@ -42,9 +49,11 @@ template:
 	# Minikube templates
 	jinja2 kubernetes_configs/cyberspatial/cyberspatial.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/cyberspatial/cyberspatial_minikube.yaml
 	jinja2 kubernetes_configs/postgis/postgis.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/postgis/postgis_minikube.yaml
+	jinja2 kubernetes_configs/geoserver/geoserver.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_minikube.yaml
 	# GKE templates
 	jinja2 kubernetes_configs/cyberspatial/cyberspatial.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/cyberspatial/cyberspatial_gke.yaml
 	jinja2 kubernetes_configs/postgis/postgis.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/postgis/postgis_gke.yaml
+	jinja2 kubernetes_configs/geoserver/geoserver.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_gke.yaml
 
 .PHONY: deploy
 deploy: push template
