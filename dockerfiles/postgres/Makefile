@@ -16,9 +16,9 @@ GOOGLE_CLOUD_PROJECT:=$(shell gcloud config list project --format="value(core.pr
 
 .PHONY: build
 build:
-	docker build -t gcr.io/$(GOOGLE_CLOUD_PROJECT)/postgis-pw -f ./dockerfiles/postgis/Dockerfile .
+	docker build -t gcr.io/$(GOOGLE_CLOUD_PROJECT)/postgres-pw -f ./dockerfiles/postgres/Dockerfile .
 
 .PHONY: push
 push: build
-	gcloud docker -- push gcr.io/$(GOOGLE_CLOUD_PROJECT)/postgis-pw
+	gcloud docker -- push gcr.io/$(GOOGLE_CLOUD_PROJECT)/postgres-pw
 

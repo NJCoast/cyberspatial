@@ -1,11 +1,11 @@
 {
   "GOOGLE_CLOUD_PROJECT" : "cybereye-165816",
   "minikube": "True",
-  "guestbook_tag": "v9",
+  "django_tag": "v9",
   "base64_db_pw": "bXlzZWNyZXRwYXNzd29yZAo=",
   "has_db": "True",
   "hot_reload": "True",
-  "hotreload_directory" : "/Users/waprin/code/django_postgres_redis/guestbook",
+  "hotreload_directory" : "/Users/cvardema/code/src/github.com/charlesvardeman/cyberspatial",
   "database_url": "postgres://postgres:postgres@postgres:5432/postgres",
   "django_settings_module": "njcoast.settings",
   "allowed_hosts": "django",

@@ -28,7 +28,7 @@ all: deploy
 
 .PHONY: build-containers
 build-containers:
-	make -f ./dockerfiles/postgis/Makefile build
+	make -f ./dockerfiles/postgres/Makefile build
 	make -f ./dockerfiles/geoserver/Makefile build
 	make -f ./dockerfiles/django/production/Makefile build
 
@@ -48,11 +48,11 @@ create-bucket:
 template:
 	# Minikube templates
 	jinja2 kubernetes_configs/cyberspatial/cyberspatial.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/cyberspatial/cyberspatial_minikube.yaml
-	jinja2 kubernetes_configs/postgis/postgis.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/postgis/postgis_minikube.yaml
+	jinja2 kubernetes_configs/postgres/postgres.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/postgres/postgres_minikube.yaml
 	jinja2 kubernetes_configs/geoserver/geoserver.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_minikube.yaml
 	# GKE templates
 	jinja2 kubernetes_configs/cyberspatial/cyberspatial.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/cyberspatial/cyberspatial_gke.yaml
-	jinja2 kubernetes_configs/postgis/postgis.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/postgis/postgis_gke.yaml
+	jinja2 kubernetes_configs/postgres/postgres.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/postgres/postgres_gke.yaml
 	jinja2 kubernetes_configs/geoserver/geoserver.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_gke.yaml
 
 .PHONY: deploy
