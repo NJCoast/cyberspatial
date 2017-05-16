@@ -37,8 +37,8 @@ COPY . /app
 RUN pip install --no-cache-dir -r /requirements/local.txt --src /usr/local/src
 
 
-COPY ./docker_compose/django/development/start.sh /start.sh
-COPY ./docker_compose/django/entrypoint.sh /entrypoint.sh
+COPY ./dockerfiles/django/development/start.sh /start.sh
+COPY ./dockerfiles/django/entrypoint.sh /entrypoint.sh
 RUN sed -i 's/\r//' /entrypoint.sh \
     && sed -i 's/\r//' /start.sh \
     && chmod +x /entrypoint.sh \

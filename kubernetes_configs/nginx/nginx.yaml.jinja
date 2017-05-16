@@ -1,0 +1,37 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: nginx
+spec:
+  replicas: 1
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: nginx
+    spec:
+      containers:
+        - image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/nginx
+          imagePullPolicy: IfNotPresent
+          name: nginx
+          ports:
+            - containerPort: 80
+      restartPolicy: Always
+---
+metadata:
+  name: nginx
+  labels:
+    name: nginx
+kind: Service
+apiVersion: v1
+spec:
+  type: LoadBalancer
+  ports:
+    - name: nginx
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    name: nginx

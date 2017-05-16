@@ -3,7 +3,7 @@ services:
   postgres:
     build:
       context: .
-      dockerfile: ./docker_compose/postgis/Dockerfile
+      dockerfile: ./dockerfiles/postgis/Dockerfile
 
   elasticsearch:
     image: elasticsearch
@@ -14,12 +14,10 @@ services:
   django:
     build:
       context: .
-      dockerfile: ./docker_compose/django/development/Dockerfile
-    command: /app/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/app
+      dockerfile: ./dockerfiles/django/production/Dockerfile
     ports:
       - "8000:8000"
+    command: /start.sh
     depends_on:
       - postgres
       - geoserver
@@ -40,7 +38,7 @@ services:
   geoserver:
     build:
       context: .
-      dockerfile: ./docker_compose/geoserver/Dockerfile
+      dockerfile: ./dockerfiles/geoserver/Dockerfile
     links:
       - postgres
     depends_on:
