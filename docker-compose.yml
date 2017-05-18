@@ -3,7 +3,7 @@ services:
   postgres:
     build:
       context: .
-      dockerfile: ./dockerfiles/postgis/Dockerfile
+      dockerfile: ./dockerfiles/postgres/Dockerfile
 
   elasticsearch:
     image: elasticsearch
