@@ -45,7 +45,7 @@ spec:
  capacity:
    storage: 5Gi
  hostPath:
-   path: /data/pv0001/
+   path: /Users/cvardema/code/src/github.com/charlesvardeman/cyberspatial/data/pv0001/
 {% else -%}
 apiVersion: v1
 kind: PersistentVolume
@@ -81,7 +81,7 @@ spec:
         - containerPort: 5432
         volumeMounts:
         - name: postgresdata
-          mountPath: /usr/local/var/postgres
+          mountPath: /var/lib/postgresql/data
         - name: secrets
           mountPath: /etc/secrets
           readOnly: true
