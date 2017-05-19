@@ -2,7 +2,8 @@
 Django==1.8.7
 
 # Geonode
--e git+https://github.com/GeoNode/geonode.git#egg=geonode
+-e git+https://github.com/NJCoast/geonode.git#egg=geonode
+
 
 # Gdal
 # pygdal==1.10.1
