@@ -28,6 +28,7 @@ apiVersion: v1
 metadata:
   name: geoserver-data
 spec:
+  storageClassName: ""
   accessModes:
     - ReadWriteOnce
   resources:
@@ -45,7 +46,7 @@ spec:
  capacity:
    storage: 5Gi
  hostPath:
-   path: /data/pv0002
+   path: "/data/pv0002"
 {% else -%}
 apiVersion: v1
 kind: PersistentVolume

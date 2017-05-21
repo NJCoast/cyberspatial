@@ -28,6 +28,7 @@ apiVersion: v1
 metadata:
   name: postgres-data
 spec:
+  storageClassName: ""
   accessModes:
     - ReadWriteOnce
   resources:
@@ -45,7 +46,7 @@ spec:
  capacity:
    storage: 5Gi
  hostPath:
-   path: /Users/cvardema/code/src/github.com/charlesvardeman/cyberspatial/data/pv0001/
+   path: "/data/pv0001"
 {% else -%}
 apiVersion: v1
 kind: PersistentVolume
