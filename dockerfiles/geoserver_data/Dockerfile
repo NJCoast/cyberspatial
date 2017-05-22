@@ -11,7 +11,7 @@ WORKDIR ${TEMP_DOWNLOADED}
 
 ENV GEOSERVER_VERSION=2.9.x-oauth2
 
-ADD download.sh ${TEMP_DOWNLOADED}
+ADD ./dockerfiles/geoserver_data/download.sh ${TEMP_DOWNLOADED}
 RUN chmod +x ${TEMP_DOWNLOADED}/download.sh
 RUN ${TEMP_DOWNLOADED}/download.sh $GEOSERVER_VERSION $TEMP_DOWNLOADED
 

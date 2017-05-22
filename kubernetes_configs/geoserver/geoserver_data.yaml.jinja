@@ -66,56 +66,22 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: geoserver
+  name: geoserver-data
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-         name: geoserver
+         name: geoserver-data
     spec:
       containers:
-      - name: geoserver
-        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/geoserver_data
+      - name: geoserver-data
+        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/geoserver-data
         imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8080
-        env:
-        - name: PUBLIC_PORT
-          value: "80"
-        - name: DJANGO_URL
-          value: http://django:8000/
-        - name: GEOSERVER_PUBLIC_LOCATION
-          value: http://geonode/geoserver/
-        - name: GEOSERVER_LOCATION
-          value: http://geoserver:8080/geoserver/
-        - name: GEOSERVER_DATA_DIR
-          value: /geoserver_data/data
-        - name: SITEURL
-          value: http://geonode/
         volumeMounts:
         - name: geoserverdata
           mountPath: /geoserver_data
-        - name: secrets
-          mountPath: /etc/secrets
-          readOnly: true
       volumes:
       - name: geoserverdata
         persistentVolumeClaim:
           claimName: geoserver-data
-      - name: secrets
-        secret:
-          secretName: db-passwords
----
-metadata:
- name: geoserver
-kind: Service
-apiVersion: v1
-spec:
-  ports:
-  - name: geoserver
-    protocol: TCP
-    port: 8080
-    targetPort: 8080
-  selector:
-    name: geoserver

@@ -50,6 +50,7 @@ template:
 	# Minikube templates
 	jinja2 kubernetes_configs/cyberspatial/cyberspatial.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/cyberspatial/cyberspatial_minikube.yaml
 	jinja2 kubernetes_configs/postgres/postgres.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/postgres/postgres_minikube.yaml
+	jinja2 kubernetes_configs/geoserver/geoserver_data.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_data_minikube.yaml
 	jinja2 kubernetes_configs/geoserver/geoserver.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_minikube.yaml
 	jinja2 kubernetes_configs/nginx/nginx.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/nginx/nginx_minikube.yaml
 	# GKE templates
@@ -57,6 +58,7 @@ template:
 	jinja2 kubernetes_configs/postgres/postgres.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/postgres/postgres_gke.yaml
 	jinja2 kubernetes_configs/nginx/nginx.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/nginx/nginx_gke.yaml
 	jinja2 kubernetes_configs/geoserver/geoserver.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_gke.yaml
+	jinja2 kubernetes_configs/geoserver/geoserver_data.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_data_gke.yaml
 
 .PHONY: deploy
 deploy: push template
