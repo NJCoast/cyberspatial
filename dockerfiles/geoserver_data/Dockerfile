@@ -19,7 +19,10 @@ RUN ${TEMP_DOWNLOADED}/download.sh $GEOSERVER_VERSION $TEMP_DOWNLOADED
 RUN ls -lart
 
 # preparing the volume
-ENV BASE_GEOSERVER_DATA_DIR /geoserver_data
-RUN mkdir -p ${BASE_GEOSERVER_DATA_DIR}
-RUN cp -r ${TEMP_DOWNLOADED}/data ${BASE_GEOSERVER_DATA_DIR}
-VOLUME ${BASE_GEOSERVER_DATA_DIR}/data
+# ENV BASE_GEOSERVER_DATA_DIR /geoserver_data
+# RUN mkdir -p ${BASE_GEOSERVER_DATA_DIR}
+# RUN cp -r ${TEMP_DOWNLOADED}/data ${BASE_GEOSERVER_DATA_DIR}
+# VOLUME ${BASE_GEOSERVER_DATA_DIR}/data
+
+COPY ./dockerfiles/geoserver_data/copydata.sh /copydata.sh
+ENTRYPOINT ["/copydata.sh"]
