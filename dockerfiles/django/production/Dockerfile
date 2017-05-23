@@ -21,6 +21,9 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 
+# Upgrade pip
+RUN pip install --upgrade pip
+
 # python-gdal does not seem to work, let's install manually the version that is
 # compatible with the provided libgdal-dev
 RUN pip install GDAL==1.10 --global-option=build_ext --global-option="-I/usr/include/gdal"

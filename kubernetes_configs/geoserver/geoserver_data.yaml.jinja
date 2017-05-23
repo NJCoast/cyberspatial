@@ -15,18 +15,18 @@
 # Template file modified from example code:
 # https://github.com/waprin/kubernetes_django_postgres_redis
 
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: db-passwords
-data:
-  djangouserpw: {{ base64_db_pw }}
+#---
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  name: db-passwords
+#data:
+#  djangouserpw: {{ base64_db_pw }}
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgres-data
+  name: geoserver-data
 spec:
   storageClassName: ""
   accessModes:
@@ -39,19 +39,19 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
- name: pv0001
+ name: pv0002
 spec:
  accessModes:
    - ReadWriteOnce
  capacity:
    storage: 5Gi
  hostPath:
-   path: "/data/pv0001"
+   path: "/data/pv0002"
 {% else -%}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv0001
+  name: pv0002
 spec:
   accessModes:
     - ReadWriteOnce
@@ -66,43 +66,22 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: postgres
+  name: geoserver-data
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-         name: postgres
+         name: geoserver-data
     spec:
       containers:
-      - name: postgres
-        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/postgres-pw
+      - name: geoserver-data
+        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/geoserver-data
         imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 5432
         volumeMounts:
-        - name: postgresdata
-          mountPath: /var/lib/postgresql/data
-        - name: secrets
-          mountPath: /etc/secrets
-          readOnly: true
+        - name: geoserverdata
+          mountPath: /geoserver_data
       volumes:
-      - name: postgresdata
+      - name: geoserverdata
         persistentVolumeClaim:
-          claimName: postgres-data
-      - name: secrets
-        secret:
-          secretName: db-passwords
----
-metadata:
- name: postgres
-kind: Service
-apiVersion: v1
-spec:
-  ports:
-  - name: postgres
-    protocol: TCP
-    port: 5432
-    targetPort: 5432
-  selector:
-    name: postgres
+          claimName: geoserver-data
