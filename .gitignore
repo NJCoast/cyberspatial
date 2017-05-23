@@ -40,6 +40,8 @@ cyberspatial_minikube.yaml
 cyberspatial_gke.yaml
 geoserver_minikube.yaml
 geoserver_gke.yaml
+geoserver_data_gke.yaml
+geoserver_data_minikube.yaml
 nginx_gke.yaml
 nginx_minikube.yaml
 postgres_gke.yaml
