@@ -27,6 +27,19 @@ services:
     env_file:
       - ./scripts/docker/env/production/django.env
 
+  celery:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/django/production/Dockerfile
+    links:
+      - rabbitmq
+      - postgres
+      - elasticsearch
+    command: celery worker --app=geonode.celery_app:app -B -l INFO
+    env_file:
+      - ./scripts/docker/env/production/django.env
+
+
   cyberspatial:
     image: geonode/nginx:geoserver
     links:
