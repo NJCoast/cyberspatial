@@ -63,17 +63,17 @@ spec:
 
 {% endif %}
 ---
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
   name: geoserver-data
 spec:
-  replicas: 1
   template:
     metadata:
       labels:
          name: geoserver-data
     spec:
+      restartPolicy: Never
       containers:
       - name: geoserver-data
         image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/geoserver-data

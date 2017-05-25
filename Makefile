@@ -97,3 +97,17 @@ migrations:
 delete:
 	gcloud container clusters delete guestbook
 	gcloud compute disks delete pg-data
+
+.PHONY: minikube_up
+minikube_up:
+	kubectl create -f kubernetes_configs/postgres/postgres_minikube.yaml
+	kubectl create -f kubernetes_configs/cyberspatial/cyberspatial_minikube.yaml
+	kubectl create -f kubernetes_configs/geoserver/geoserver_minikube.yaml
+	kubectl create -f kubernetes_configs/nginx/nginx_minikube.yaml
+
+.PHONY: minikube_down
+minikube_down:
+	kubectl delete -f kubernetes_configs/postgres/postgres_minikube.yaml | true
+	kubectl delete -f kubernetes_configs/cyberspatial/cyberspatial_minikube.yaml | true
+	kubectl delete -f kubernetes_configs/geoserver/geoserver_minikube.yaml | true
+	kubectl delete -f kubernetes_configs/nginx/nginx_minikube.yaml | true

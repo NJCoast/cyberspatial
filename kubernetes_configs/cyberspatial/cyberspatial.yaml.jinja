@@ -30,7 +30,7 @@ spec:
       - name: django
         image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/django
         {% if minikube %}
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
        {%- endif %}
         command: ["/start.sh"]
         env:

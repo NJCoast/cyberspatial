@@ -34,19 +34,24 @@ spec:
   resources:
     requests:
       storage: 5Gi
+  selector:
+    matchLabels:
+      type: geoserver
 ---
 {% if minikube -%}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
  name: pv0002
+ labels:
+  type: geoserver
 spec:
  accessModes:
    - ReadWriteOnce
  capacity:
    storage: 5Gi
  hostPath:
-   path: "/data/pv0002"
+   path: "/data/pv0002/data"
 {% else -%}
 apiVersion: v1
 kind: PersistentVolume
@@ -77,7 +82,7 @@ spec:
       containers:
       - name: geoserver
         image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/geoserver
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
@@ -95,17 +100,11 @@ spec:
           value: http://geonode/
         volumeMounts:
         - name: geoserverdata
-          mountPath: /geoserver_data
-        - name: secrets
-          mountPath: /etc/secrets
-          readOnly: true
+          mountPath: /geoserver_data/data
       volumes:
       - name: geoserverdata
         persistentVolumeClaim:
           claimName: geoserver-data
-      - name: secrets
-        secret:
-          secretName: db-passwords
 ---
 metadata:
  name: geoserver

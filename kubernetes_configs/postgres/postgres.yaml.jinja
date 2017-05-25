@@ -34,12 +34,17 @@ spec:
   resources:
     requests:
       storage: 5Gi
+  selector:
+    matchLabels:
+      type: postgres
 ---
 {% if minikube -%}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
  name: pv0001
+ labels:
+  type: postgres
 spec:
  accessModes:
    - ReadWriteOnce
@@ -77,7 +82,7 @@ spec:
       containers:
       - name: postgres
         image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/postgres-pw
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 5432
         volumeMounts:

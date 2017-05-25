@@ -3,18 +3,18 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   creationTimestamp: null
-  name: nginx
+  name: geonode
 spec:
   replicas: 1
   template:
     metadata:
       creationTimestamp: null
       labels:
-        name: nginx
+        name: geonode
     spec:
       containers:
         - image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/nginx
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: nginx
           ports:
             - containerPort: 443
@@ -22,21 +22,21 @@ spec:
       restartPolicy: Always
 ---
 metadata:
-  name: nginx
+  name: geonode
   labels:
-    name: nginx
+    name: geonode
 kind: Service
 apiVersion: v1
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
     - port: 80
       protocol: TCP
-      name: https
+      name: http
       targetPort: 80
     - port: 443
       protocol: TCP
       name: https
       targetPort: 443
   selector:
-    name: nginx
+    name: geonode

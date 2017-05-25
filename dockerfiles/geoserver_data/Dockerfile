@@ -22,7 +22,7 @@ RUN ls -lart
 # ENV BASE_GEOSERVER_DATA_DIR /geoserver_data
 # RUN mkdir -p ${BASE_GEOSERVER_DATA_DIR}
 # RUN cp -r ${TEMP_DOWNLOADED}/data ${BASE_GEOSERVER_DATA_DIR}
-# VOLUME ${BASE_GEOSERVER_DATA_DIR}/data
+VOLUME /geoserver_data
 
 COPY ./dockerfiles/geoserver_data/copydata.sh /copydata.sh
-ENTRYPOINT ["/bin/ash"]
+ENTRYPOINT ["/copydata.sh"]
