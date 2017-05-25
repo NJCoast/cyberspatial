@@ -25,4 +25,4 @@ RUN ls -lart
 # VOLUME ${BASE_GEOSERVER_DATA_DIR}/data
 
 COPY ./dockerfiles/geoserver_data/copydata.sh /copydata.sh
-ENTRYPOINT ["/copydata.sh"]
+ENTRYPOINT ["/bin/ash"]
