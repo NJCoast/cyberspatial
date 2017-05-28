@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        io.kompose.service: postgres
+    spec:
+      containers:
+      - image: mdillon/postgis:9.6-alpine
+        name: postgres
+        ports:
+          - containerPort: 5432
+            name: postgres
+        volumeMounts:
+          - name: postgres-persistent-storage
+            mountPath: /var/lib/postgresql/data
+            subPath: data/
+      volumes:
+        - name: postgres-persistent-storage
+          gcePersistentDisk:
+            pdName: postgres-disk
+            fsType: ext4
