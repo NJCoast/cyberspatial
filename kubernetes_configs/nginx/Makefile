@@ -2,18 +2,13 @@
 
 .PHONY: build-template
 build-template:
-	jinja2 postgres-pv-gke.yaml.jinja ../../gke_jinja.json --format=json > postgres-pve-gke.yaml
+	jinja2 nginx-deployment-gke.yaml.jinja ../../gke_jinja.json --format=json > nginx-deployment-gke.yaml
+	jinja2 nginx-deployment-minikube.yaml.jinja ../../minikube_jinja.json --format=json > nginx-deployment-minikube.yaml
 
-.PHONY: postgres-up
-	kubectl create -f ./postgres-secret.yaml
-	kubectl create -f ./postgres-pvc.yaml
-	kubectl create -f ./postgres-pv-minikube.yaml
-	kubectl create -f ./postgres-deployment.yaml
-	kubectl create -f ./postgres-service.yaml
+.PHONY: nginx-up
+	kubectl create -f ./nginx-deployment-minikube.yaml
+	kubectl create -f ./nginx-service.yaml
 
-.PHONY: postgres-down
-	kubectl delete -f ./postgres-secret.yaml
-	kubectl delete -f ./postgres-pvc.yaml
-	kubectl delete -f ./postgres-pv-minikube.yaml
-	kubectl delete -f ./postgres-deployment.yaml
-	kubectl delete -f ./postgres-service.yamlkubectl
+.PHONY: nginx-down
+	kubectl delete -f ./nginx-deployment-minikube.yaml
+	kubectl delete -f ./nginx-service.yaml
