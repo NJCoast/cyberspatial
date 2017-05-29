@@ -1,0 +1,13 @@
+---
+metadata:
+ name: geoserver
+kind: Service
+apiVersion: v1
+spec:
+  ports:
+  - name: geoserver
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
+  selector:
+    name: geoserver

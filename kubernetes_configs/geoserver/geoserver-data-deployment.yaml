@@ -1,0 +1,23 @@
+---
+apiVersion: batch/v2
+kin3d4: Job
+metadata:
+  name: geoserver-data
+spec:
+  template:
+    metadata:
+      labels:
+         name: geoserver-data
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: geoserver-data
+        image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/geoserver-data
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: geoserverdata
+          mountPath: /geoserver_data
+      volumes:
+      - name: geoserverdata
+        persistentVolumeClaim:
+          claimName: geoserver-data
