@@ -3,7 +3,6 @@
 .PHONY: build-template
 build-template:
 	jinja2 postgres-pv-gke.yaml.jinja ../../gke_jinja.json --format=json > postgres-pv-gke.yaml
-	jinja2 postgres-pv-gke.yaml.jinja ../../minikube_jinja.json --format=json > postgres-pv-minikube.yaml
 
 .PHONY: postgres-up
 postgres-up:
