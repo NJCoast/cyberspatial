@@ -9,7 +9,6 @@ build-template:
 
 .PHONY: geoserver-up
 geoserver-up:
-	kubectl create -f ./geoserver-secret.yaml
 	kubectl create -f ./geoserver-pvc.yaml
 	kubectl create -f ./geoserver-pv-minikube.yaml
 	kubectl create -f ./geoserver-deployment-minikube.yaml
@@ -17,7 +16,6 @@ geoserver-up:
 
 .PHONY: geoserver-down
 geoserver-down:
-	kubectl delete -f ./geoserver-secret.yaml
 	kubectl delete -f ./geoserver-pvc.yaml
 	kubectl delete -f ./geoserver-pv-minikube.yaml
 	kubectl delete -f ./geoserver-deployment-minikube.yaml
