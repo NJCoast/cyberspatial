@@ -5,6 +5,7 @@ build-template:
 	jinja2 postgres-pv-gke.yaml.jinja ../../gke_jinja.json --format=json > postgres-pve-gke.yaml
 
 .PHONY: postgres-up
+postgres-up:
 	kubectl create -f ./postgres-secret.yaml
 	kubectl create -f ./postgres-pvc.yaml
 	kubectl create -f ./postgres-pv-minikube.yaml
@@ -12,6 +13,7 @@ build-template:
 	kubectl create -f ./postgres-service.yaml
 
 .PHONY: postgres-down
+postgres-down:
 	kubectl delete -f ./postgres-secret.yaml
 	kubectl delete -f ./postgres-pvc.yaml
 	kubectl delete -f ./postgres-pv-minikube.yaml
