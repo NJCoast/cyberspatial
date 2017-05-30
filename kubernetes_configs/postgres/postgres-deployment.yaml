@@ -1,3 +1,4 @@
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -21,6 +22,5 @@ spec:
             subPath: data/
       volumes:
         - name: postgres-persistent-storage
-          gcePersistentDisk:
-            pdName: postgres-disk
-            fsType: ext4
+          persistentVolumeClaim:
+            claimName: postgres-data
