@@ -14,7 +14,6 @@ spec:
     spec:
       containers:
         - image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/nginx
-          imagePullPolicy: Always
           name: nginx
           ports:
             - containerPort: 443

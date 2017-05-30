@@ -13,7 +13,6 @@ spec:
       containers:
       - name: geoserver
         image: gcr.io/{{ GOOGLE_CLOUD_PROJECT }}/geoserver
-        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
