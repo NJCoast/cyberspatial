@@ -47,10 +47,10 @@ create-bucket:
 
 .PHONY: template
 template:
-	make -f ./kubernetes_configs/django/Makefile build-templates
-	make -f ./kubernetes_configs/geoserver/Makefile build-templates
-	make -f ./kubernetes_configs/nginx/Makefile build-templates
-	make -f ./kubernetes_configs/postgres/Makefile build-templates
+	make -f ./kubernetes_configs/django/Makefile build-template
+	make -f ./kubernetes_configs/geoserver/Makefile build-template
+	make -f ./kubernetes_configs/nginx/Makefile build-template
+	make -f ./kubernetes_configs/postgres/Makefile build-template
 
 .PHONY: deploy
 deploy: push template
