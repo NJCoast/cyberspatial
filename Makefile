@@ -47,18 +47,10 @@ create-bucket:
 
 .PHONY: template
 template:
-	# Minikube templates
-	jinja2 kubernetes_configs/cyberspatial/cyberspatial.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/cyberspatial/cyberspatial_minikube.yaml
-	jinja2 kubernetes_configs/postgres/postgres.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/postgres/postgres_minikube.yaml
-	jinja2 kubernetes_configs/geoserver/geoserver_data.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_data_minikube.yaml
-	jinja2 kubernetes_configs/geoserver/geoserver.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_minikube.yaml
-	jinja2 kubernetes_configs/nginx/nginx.yaml.jinja minikube_jinja.json --format=json > kubernetes_configs/nginx/nginx_minikube.yaml
-	# GKE templates
-	jinja2 kubernetes_configs/cyberspatial/cyberspatial.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/cyberspatial/cyberspatial_gke.yaml
-	jinja2 kubernetes_configs/postgres/postgres.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/postgres/postgres_gke.yaml
-	jinja2 kubernetes_configs/nginx/nginx.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/nginx/nginx_gke.yaml
-	jinja2 kubernetes_configs/geoserver/geoserver.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_gke.yaml
-	jinja2 kubernetes_configs/geoserver/geoserver_data.yaml.jinja gke_jinja.json --format=json > kubernetes_configs/geoserver/geoserver_data_gke.yaml
+	make -f ./kubernetes_configs/django/Makefile build-template
+	make -f ./kubernetes_configs/geoserver/Makefile build-template
+	make -f ./kubernetes_configs/nginx/Makefile build-template
+	make -f ./kubernetes_configs/postgres/Makefile build-template
 
 .PHONY: deploy
 deploy: push template
@@ -97,3 +89,17 @@ migrations:
 delete:
 	gcloud container clusters delete guestbook
 	gcloud compute disks delete pg-data
+
+.PHONY: minikube_up
+minikube_up:
+	kubectl create -f kubernetes_configs/postgres/postgres_minikube.yaml
+	kubectl create -f kubernetes_configs/cyberspatial/cyberspatial_minikube.yaml
+	kubectl create -f kubernetes_configs/geoserver/geoserver_minikube.yaml
+	kubectl create -f kubernetes_configs/nginx/nginx_minikube.yaml
+
+.PHONY: minikube_down
+minikube_down:
+	kubectl delete -f kubernetes_configs/postgres/postgres_minikube.yaml | true
+	kubectl delete -f kubernetes_configs/cyberspatial/cyberspatial_minikube.yaml | true
+	kubectl delete -f kubernetes_configs/geoserver/geoserver_minikube.yaml | true
+	kubectl delete -f kubernetes_configs/nginx/nginx_minikube.yaml | true

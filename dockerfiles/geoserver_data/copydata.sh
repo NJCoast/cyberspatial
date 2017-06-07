@@ -8,5 +8,5 @@ TEMP_DOWNLOADED=/tmp/geonode/downloaded
 
 
 # preparing the volume
-mkdir -p ${BASE_GEOSERVER_DATA_DIR}
-cp -r ${TEMP_DOWNLOADED}/data ${BASE_GEOSERVER_DATA_DIR}
+mkdir -p ${GEOSERVER_BASE_DATA_DIR}
+cp -r ${TEMP_DOWNLOADED}/data ${GEOSERVER_BASE_DATA_DIR}
