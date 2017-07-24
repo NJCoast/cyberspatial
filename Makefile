@@ -87,7 +87,7 @@ migrations:
 
 .PHONY: delete
 delete:
-	gcloud container clusters delete guestbook
+	gcloud container clusters delete njcoast
 	gcloud compute disks delete pg-data
 
 .PHONY: minikube_up
