@@ -36,7 +36,7 @@ build-images:
 .PHONY: create-cluster
 create-cluster:
 	gcloud container clusters create njcoast \
-		--scope "https://www.googleapis.com/auth/userinfo.email","cloud-platform" \
+		--scopes "https://www.googleapis.com/auth/userinfo.email","cloud-platform" \
 		--num-nodes=$(MIN)
 	gcloud container clusters get-credentials njcoast
 
