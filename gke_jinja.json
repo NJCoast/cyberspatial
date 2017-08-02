@@ -2,6 +2,7 @@
   "GOOGLE_CLOUD_PROJECT": "utopian-pact-123818",
   "minikube": null,
   "django_tag": "v9",
+  "db_user": "bmpjb2FzdA==",
   "base64_db_pw": "bXlzZWNyZXRwYXNzd29yZAo=",
   "gce_disk_name": "pg-data",
   "has_db": "True",
