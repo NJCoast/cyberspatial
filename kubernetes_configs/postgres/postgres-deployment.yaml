@@ -20,6 +20,17 @@ spec:
           - name: postgres-persistent-storage
             mountPath: /var/lib/postgresql/data
             subPath: data/
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: db-passwords
+                key: djangouser
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-passwords
+                key: djangouserpw
       volumes:
         - name: postgres-persistent-storage
           persistentVolumeClaim:
