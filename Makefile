@@ -82,8 +82,8 @@ autoscale-on:
 migrations:
 	kubectl exec $(CYBERSPATIAL_POD_NAME) -- /app/manage.py migrate --noinput
 	kubectl exec $(CYBERSPATIAL_POD_NAME) -- /app/manage.py loaddata sample_admin
-	kubectl exec $(CYBERSPATIAL_POD_NAME) -- /app/manage.py loaddata /usr/local/src/geonode/geonode/base/fixtures/default_oauth_apps_docker.json
-	kubectl exec $(CYBERSPATIAL_POD_NAME) -- /app/manage.py loaddata /usr/local/src/geonode/geonode/base/fixtures/initial_data.json
+	kubectl exec $(CYBERSPATIAL_POD_NAME) -- /app/manage.py loaddata default_oauth_apps_docker
+	kubectl exec $(CYBERSPATIAL_POD_NAME) -- /app/manage.py loaddata initial_data
 
 .PHONY: delete
 delete:
