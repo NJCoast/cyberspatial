@@ -8,6 +8,7 @@ spec:
   template:
     metadata:
       labels:
+        app: rabbitmq
         io.kompose.service: rabbitmq
     spec:
       containers:
