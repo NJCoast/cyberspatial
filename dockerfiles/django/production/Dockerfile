@@ -41,10 +41,13 @@ RUN pip install --no-cache-dir -r /requirements/production.txt --src /usr/local/
 
 
 COPY ./dockerfiles/django/production/start.sh /start.sh
+COPY ./dockerfiles/django/production/celary.sh /celary.sh
 COPY ./dockerfiles/django/entrypoint.sh /entrypoint.sh
 RUN sed -i 's/\r//' /entrypoint.sh \
+    && sed -i 's/\r//' /celary.sh \
     && sed -i 's/\r//' /start.sh \
     && chmod +x /entrypoint.sh \
+    && chmod +x /celary.sh \
     && chmod +x /start.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
