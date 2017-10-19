@@ -4,7 +4,7 @@ MAINTAINER GeoNode Development Team
 #
 # Set GeoServer version and data directory
 #
-ENV GEOSERVER_VERSION=2.9.x-oauth2
+ENV GEOSERVER_VERSION=2.10.x
 ENV GEOSERVER_DATA_DIR="/geoserver_data/data"
 
 #
@@ -15,6 +15,9 @@ RUN cd /usr/local/tomcat/webapps \
     && unzip -q geoserver-${GEOSERVER_VERSION}.war -d geoserver \
     && rm geoserver-${GEOSERVER_VERSION}.war \
     && mkdir -p $GEOSERVER_DATA_DIR
+
+# Install Patch
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
 
 VOLUME $GEOSERVER_DATA_DIR
 
