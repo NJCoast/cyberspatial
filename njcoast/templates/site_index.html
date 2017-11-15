@@ -35,7 +35,7 @@
     <div class="gray-zone" style="margin-bottom: 50px">
       <div class="container ways-to-use">
         <div class="row emphasis">
-          <img src="{{ STATIC_URL }}images/njcoast-logo_white_watermark.png" />
+          <img class="watermark" src="{{ STATIC_URL }}images/njcoast-logo_white_watermark.png" />
           <div class="col-sm-1 col-lg-2"></div>
           <div class="col-sm-10 col-lg-8">
             <p><b>NJcoast</b> has created customized views for municipal planners, emergency managers, and first responders that will automatically pre-populate with the specific GIS layers that are most relevant to one of the three roles. Users can access <i>role-specific resources</i> through a standard web browser on their personal computers, smartphones and tablets.</p>
@@ -100,7 +100,7 @@
           </div>
           <div class="col-sm-10">
             <p>NJcoast is the product of Rapid Hurricane Risk Assessment and Decision Support to Enhance Response, Recovery and Resilience in New Jersey under the Statewide and Regional Planning Assistance Grant Program under the New Jersey Department of Community Affairs (NJDCA), Office of Local Planning Services (LPS) led by Commissioner Charles A. Richman and managed by Keith Henderson.</p>
-            <p>Learn more about the <a href="">NJcoast</a></p>
+            <p>Learn more about the <a href="{% url "about" %}">NJcoast</a></p>
           </div>
         </div>
       </div>
