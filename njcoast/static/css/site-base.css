@@ -1,0 +1,202 @@
+/*
+ * Style overrides for NJ Coast
+ */
+
+ hr {
+  margin: 40px 0;
+}
+
+p.larger {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.row.spaced {
+  margin-bottom: 30px; 
+}
+
+.well.well-reverse {
+  background: #d2d8e2;
+  border: none;
+  border-top: 4px solid #1f3a6e;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  padding: 29px;
+  color: #1f3a6e;
+}
+
+.home .navbar-inverse {
+  background-color: rgba(15,37,58,0.8); /* rgba(18,32,60,0.7); */
+}
+
+.navbar-brand {
+  background: url("../images/njcoast-logo_white.png") 0 10px no-repeat;
+  background-size: contain;
+  height: 65px;
+  width: 170px;
+  margin-right: 10px;
+}
+
+.jumbotron.njcoast-image {
+  background: #2c689c url(../images/njcoast-banner.jpg) center center no-repeat;
+  background-size: cover;
+  text-shadow: 1px 1px 4px rgba(0,0,0,1.0);
+  padding: 6em 0 2.5em;
+}
+
+.jumbotron.njcoast-image h1 {
+  font-size: 52px;
+  color: #eb6b00; /* #ff8f31; */
+}
+
+.jumbotron.njcoast-image .action-box {
+  margin: 0px -15px 0;
+  background-color: rgba(33,32,17,0.5); /* rgba(255,255,255,0.7); */
+  padding: 25px 30px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.jumbotron.njcoast-image .action-box h3 {
+  margin-top: 0;
+}
+
+.jumbotron.njcoast-image .action-box p {
+  font-weight: normal;
+}
+
+.jumbotron.njcoast-image .action-box a.btn {
+  color: #fff;
+}
+
+.jumbotron.njcoast-image .action-box p.qualifier {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 17px;
+  letter-spacing: 0;
+  text-align: center; 
+  letter-spacing: 0.5px;
+}
+
+.jumbotron.njcoast-image.slim {
+  padding: 3.5em 0;
+}
+
+
+.gray-zone { 
+  background: #f5f5f5;
+  border: solid 1px #e5e5e5;
+  border-right: 0px;
+  border-left: 0px;
+  padding: 60px 15px 40px;
+}
+
+.gray-zone-symmetric { 
+  background: #f5f5f5;
+  border: solid 1px #e5e5e5;
+  border-right: 0px;
+  border-left: 0px;
+  padding: 30px 15px 40px;
+}
+
+.emphasis {
+  color: #1f3a6e;
+  font-size: 18px;
+  padding: 0;
+  position: relative;
+  margin-top: 20px;
+} 
+
+.emphasis p {
+  position: relative;
+}
+
+img.watermark {
+  position: absolute;
+  top: -70px;
+  left: 0px;
+}
+
+.container.ways-to-use {
+  text-align: center;
+}
+.container.ways-to-use h3 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+.container.ways-to-use .col-sm-4 {
+  padding: 40px 20px 30px;
+}
+.container.ways-to-use img {
+  margin-bottom: 10px;
+}
+
+.container.ads {
+}
+
+.container.ads #research,
+.container.ads #training {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.container.ads h1 {
+  margin-top: 0;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 32px;
+  line-height: 40px;
+}
+.container.ads h5 {
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #f07d20;
+}
+.container.ads img.half-size {
+  max-width: 40%;
+  margin: 0 auto;
+}
+
+.container.ads #recent-news h2 {
+  font-weight: 400;
+  letter-spacing: 1px;  
+}
+
+.home .big-search {
+  background: #122d46; /* #14334f; #12203c; */
+}
+
+.reduce-on-mobile {
+  margin: 15px 0 0 0;
+}
+
+
+@media screen and (max-width: 768px) {
+
+  .jumbotron.njcoast-image .action-box {
+    margin-top: 50px;
+  }
+  .gray-zone-symmetric { 
+    padding: 0 0 40px;
+  }
+  .emphasis {
+    padding: 0 20px;
+    margin-top: 40px;
+  } 
+  .emphasis img {
+    position: absolute;
+    top: -90px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .remove-on-mobile {
+    display: none;
+  }
+  .reduce-on-mobile {
+    width: 50%;
+    margin: 20px auto;
+  }
+
+}
