@@ -1,15 +1,155 @@
-{% extends 'index.html' %}
+{% extends "site_base.html" %}
 {% load i18n %}
-{% comment %}
-This is where you can override the hero area block. You can simply modify the content below or replace it wholesale to meet your own needs.
-{% endcomment %}
+{% load staticfiles %}
+{% load base_tags %}
+
+{% block title %} {% trans "Welcome!" %} - {{ block.super }} {% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+{% block middle %}
+  {{ block.super }}
   {% block hero %}
-  <div class="jumbotron">
+  <div class="jumbotron njcoast-image">
     <div class="container">
-      <h1>{% trans "Welcome" %}</h1>
-      <p>{% blocktrans %}CyberEye Rapid Hurricane Risk Assessment and Decision Support to Enhance Response, Recovery and Resilience in New Jersey based, in part, on GeoNode, an open source platform for sharing geospatial data and maps.{% endblocktrans %}</p>
-      <p>{% blocktrans %}If you have any questions about the software or service, join our <a href="https://groups.google.com/d/forum/geonode-users">mailing list</a>.{% endblocktrans %}</p>
-      <span>{% trans 'Need help?' %} <a href="http://docs.geonode.org/en/latest/tutorials/users/quickstart/index.html">{% trans 'Getting Started' %}</a></span>
+      <div class="row">
+        <div class="col-sm-7">
+          <h1>NJcoast</h1>
+          <p>Building resilience to coastal hazards through geospatial decision support</p>
+        </div>
+        <div class="col-sm-5">
+            <div class="action-box">
+              <p style="margin-bottom:5px">Get started</p>
+              <p style="font-size: 17px; margin-bottom:20px">Explore NJcoast’s public geospatial datasets and simulate a landfalling hurricane</p>
+              <p><a class="btn btn-primary btn-lg btn-block" href="" role="button">Explore NJcoast &raquo;</a></p>
+              <p class="qualifier">To access all of NJcoast’s features, import your own geospatial data, and conduct extensive hurricane simulations, you will need to <a href="">request a user account</a></p>
+            </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </div>  
   {% endblock %}
+
+  {% block mainbody %}
+    {% block datasets %}
+    <div class="gray-zone" style="margin-bottom: 50px">
+      <div class="container ways-to-use">
+        <div class="row emphasis">
+          <img src="{{ STATIC_URL }}images/njcoast-logo_white_watermark.png" />
+          <div class="col-sm-1 col-lg-2"></div>
+          <div class="col-sm-10 col-lg-8">
+            <p><b>NJcoast</b> has created customized views for municipal planners, emergency managers, and first responders that will automatically pre-populate with the specific GIS layers that are most relevant to one of the three roles. Users can access <i>role-specific resources</i> through a standard web browser on their personal computers, smartphones and tablets.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <a href="#training"><img class="img-responsive" src="{{ STATIC_URL }}images/ad_plan.png" /></a>
+            <h3>Planning &<br />Service Delivery</h3>
+            <p>Planning, Engineering and Public Works users can interact with the full inventory of geospatial data, regardless of GIS expertise level, while retaining the ability to export GIS layers created in NJcoast to commercial environments like ArcGIS.</p>
+            <p><a href="#training">Municipal Planner View &raquo;</a></p>
+          </div>
+          <div class="col-sm-4">
+            <a href="#training"><img class="img-responsive" src="{{ STATIC_URL }}images/ad_emerg-mgr.png" /></a>
+            <h3>Emergency Management</h3>
+            <p>Emergency management teams can access a rich inventory of geospatial data and simulate projected storm impacts to support critical decision making as they coordinate responses to landfalling storms.</p>
+            <p><a href="#research">Emergency Manager View &raquo;</a></p>
+          </div>
+          <div class="col-sm-4">
+            <a href="#training"><img class="img-responsive" src="{{ STATIC_URL }}images/ad_first-resp.png" /></a>
+            <h3>First<br />Responders</h3>
+            <p>First responders on the ground can access NJcoast from their mobile device to view essential geospatial data as they respond to routine calls or evacuation, rescue and response functions.</p>
+            <p><a href="#training">First Responder View &raquo;</a></p>
+          </div>
+        </div>
+      </div>
+      </div>
+  
+  
+      <div class="container ads">
+        <!-- Information -->
+        <div class="row" id="research">
+          <div class="col-sm-3">
+            <img class="img-responsive" src="{{ STATIC_URL }}images/graphic_user-friendly.png" />
+          </div>
+          <div class="col-sm-9">
+            <h5>access</h5>
+            <h1>User-Friendly Geospatial Data at Your Fingertips</h1>  
+            <p>NJcoast gives municipalities throughout New Jersey access to the same powerful geospatial web environment currently being used by the World Bank, the United Nations and the U.S. State Department to manage critical disaster recovery and humanitarian aid efforts. Registered users will have centralized access to the most up-to-date releases of dozens of GIS layers maintained by the State Office of Information Technologies, and can even integrate local municipal datasets such as properties and parcels, critical facilities, infrastructure networks, public works, and zoning &mdash; in one web environment. Users can chose the layers they wish to visualize, annotate and securely exchange with team members across and outside their municipality. Municipal officials can now become their own Geographic Information System (GIS) experts, capable of efficiently cataloging the location, attributes and condition of municipal assets without having to learn or maintain sophisticated software.</p>
+            <p><a href="#page-top">Back to top</a></p>
+          </div>
+        </div>
+        <hr />
+        <div class="row" id="training">
+          <div class="col-sm-9">
+            <h5>tools</h5>
+            <h1>A Growing Library of Custom Tools for Decision Making</h1>  
+            <p>NJcoast will build out, over time, a number of tools to assist municipalities in generating additional GIS data critical to decision making. For example, the <b>Storm Hazard Projection Tool</b> gives municipal officials the unprecedented ability to rapidly simulate the impact of hurricanes and nor’easters on their communities with the same level of accuracy as the most sophisticated models run by the U.S. Army Corps of Engineers. Users will be able to visualize in near real-time the anticipated wind speeds and storm surges across the state’s municipalities for the scenario of their choosing or for the latest track information from the National Hurricane Center. The interactive functionality of this tool even allows users to alter storm path to evaluate “what if” and “worst case scenarios” that further consider the effects of degraded dunes, variable tides and even sea level rise -- all within a matter of minutes. All these simulations can be quickly shared with other users with a click of a button.</p>
+            <p><a href="#page-top">Back to top</a></p>
+          </div>
+          <div class="col-sm-3">
+            <img class="img-responsive" src="{{ STATIC_URL }}images/graphic_custom-tools.png" />
+          </div>
+        </div>
+      </div> <!-- /container -->
+  
+      <div class="gray-zone" style="margin-top: 50px">
+      <div class="container proj-desc">
+        <div class="row">
+          <div class="col-sm-2">
+            <img src="{{ STATIC_URL }}images/njcoast-logo.png" class="img-responsive" />
+          </div>
+          <div class="col-sm-10">
+            <p>NJcoast is the product of Rapid Hurricane Risk Assessment and Decision Support to Enhance Response, Recovery and Resilience in New Jersey under the Statewide and Regional Planning Assistance Grant Program under the New Jersey Department of Community Affairs (NJDCA), Office of Local Planning Services (LPS) led by Commissioner Charles A. Richman and managed by Keith Henderson.</p>
+            <p>Learn more about the <a href="">NJcoast</a></p>
+          </div>
+        </div>
+      </div>
+      </div>
+    {% endblock %}
+
+  {% block showcase %}
+  <section id="showcase">
+    <div class="container">
+      <div class="row">
+        <h2>Featured Datasets</h2>
+        {% verbatim %}
+        <div ng-app="featured">
+          <div ng-repeat="item in featured | limitTo:4">
+            <div class="col-md-3">
+              <a href="{{ item.detail_url }}"><img ng-src="{{ item.thumbnail_url }}" /></a>
+              <h4>{{ item.title | limitTo: 20 }}{{item.title.length > 20 ? '...' : ''}}</h4>
+            </div>
+          </div>
+        </div>
+  		{% endverbatim %}
+      </div>
+      <p><a href="/search/">Explore all datasets</a></p>
+    </div>
+  </section>
+  {% endblock %}
+
+  {% endblock %}
+
+{% endblock %}
+
+{% block extra_script %}
+{{ block.super }}
+{% if DEBUG_STATIC %}
+<script src="{{ STATIC_URL }}lib/js/angular.js"></script>
+{% endif %}
+<script type="text/javascript">
+    FEATURED_URL = '{% url 'api_dispatch_list' api_name='api' resource_name='featured' %}'
+    'use strict';
+    (function(){
+      var module = angular.module('featured', []);
+      module.run(function($http, $rootScope){
+        $http.get(FEATURED_URL).success(function(data){
+          $rootScope.featured = data.objects;
+        });
+      });
+    })();
+</script>
+<script>
+	$('[data-toggle="tooltip"]').tooltip();
+</script>
+{% endblock extra_script %}
