@@ -2,21 +2,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   name: rabbitmq
 spec:
   replicas: 1
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
+        app: rabbitmq
         io.kompose.service: rabbitmq
     spec:
       containers:
-      - image: rabbitmq
+      - image: rabbitmq:3.6.10-alpine
         name: rabbitmq
-        resources: {}
-      restartPolicy: Always
-status: {}
-
+        ports:
+          - containerPort: 5672
+            name: rabbitmq

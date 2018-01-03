@@ -7,26 +7,12 @@ cmd="$@"
 # environment variables just to support cookiecutter out of the box. That makes no sense, so this little entrypoint
 # does all this for us.
 
-# the official postgres image uses 'postgres' as default user if not set explictly.
-if [ -z "$POSTGRES_USER" ]; then
-    export POSTGRES_USER=postgres
-fi
-
-# If not DB is set, then use USER by default
-if [ -z "$POSTGRES_DB" ]; then
-    export POSTGRES_DB=$POSTGRES_USER
-fi
-
-# Need to update the DATABASE_URL if using DOCKER
-export DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres:5432/$POSTGRES_DB
-
-
 function postgres_ready(){
 python << END
 import sys
 import psycopg2
 try:
-    conn = psycopg2.connect(dbname="$POSTGRES_DB", user="$POSTGRES_USER", password="$POSTGRES_PASSWORD", host="postgres")
+    conn = psycopg2.connect(dbname="$DATABASE_NAME", user="$DATABASE_USER", password="$DATABASE_PASSWORD", host="$DATABASE_HOST")
 except psycopg2.OperationalError:
     sys.exit(-1)
 sys.exit(0)

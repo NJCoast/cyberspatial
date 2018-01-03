@@ -1,10 +1,9 @@
-
-
-
 .PHONY: rabbitmq-up
-	kubectl create -f ./rabbitmq-deployment-minikube.yaml
+rabbitmq-up:
+	kubectl create -f ./rabbitmq-deployment.yaml
 	kubectl create -f ./rabbitmq-service.yaml
 
 .PHONY: rabbitmq-down
-	kubectl delete -f ./rabbitmq-deployment-minikube.yaml
+rabbitmq-down:
+	kubectl delete -f ./rabbitmq-deployment.yaml
 	kubectl delete -f ./rabbitmq-service.yaml

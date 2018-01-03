@@ -20,7 +20,6 @@ RUN apt-get update && apt-get install -y \
     curl \
 	--no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-
 # Upgrade pip
 RUN pip install --upgrade pip
 
@@ -30,21 +29,20 @@ RUN pip install GDAL==1.10 --global-option=build_ext --global-option="-I/usr/inc
 
 # Requirements have to be pulled and installed here, otherwise caching won't work
 COPY ./requirements /requirements
+RUN pip install --no-cache-dir -r /requirements/production.txt --src /usr/local/src
 
 RUN mkdir /app
-
-# Main work directory will be app
 WORKDIR /app
 COPY . /app
 
-RUN pip install --no-cache-dir -r /requirements/production.txt --src /usr/local/src
-
-
 COPY ./dockerfiles/django/production/start.sh /start.sh
+COPY ./dockerfiles/django/production/celary.sh /celary.sh
 COPY ./dockerfiles/django/entrypoint.sh /entrypoint.sh
 RUN sed -i 's/\r//' /entrypoint.sh \
+    && sed -i 's/\r//' /celary.sh \
     && sed -i 's/\r//' /start.sh \
     && chmod +x /entrypoint.sh \
+    && chmod +x /celary.sh \
     && chmod +x /start.sh
 
 ENTRYPOINT ["/entrypoint.sh"]

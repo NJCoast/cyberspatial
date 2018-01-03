@@ -1,0 +1,120 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% block title %} {% trans "About GeoNode" %} — {{ block.super }} {% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+{% block middle %}
+<div class="jumbotron njcoast-image slim">
+    <div class="container">
+      <div class="row">
+      </div>
+    </div>
+  </div>  
+
+    <div class="gray-zone-symmetric" style="margin-bottom: 50px">
+    <div class="container">
+      <div class="row emphasis">
+        <div class="col-sm-2">
+          <img class="img-responsive remove-on-mobile" src="{{ STATIC_URL }}images/njcoast-logo_no-text.png" />
+        </div>
+        <div class="col-sm-10">
+          <h1 style="margin-top:0">About NJcoast</h1>
+          <p><b>NJcoast</b> centralizes access, visualization, annotation and sharing of GIS datasets in a single secure and user-friendly web platform. Users can easily access NJcoast from anywhere &mdash; their desktop, their phone or their tablet &mdash; without having to download and install new software. Users can also generate additional GIS data using NJcoast’s custom toolsets, such as the <a href="#shp-tool">Storm Hazard Projection Tool</a>.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="container">
+      <div class="row" >
+        <div class="col-sm-12">
+          <h2>NJcoast and GeoNode</h2>
+          <p class="larger">NJcoast is built on an open-source, geospatial content management system (CMS) called <a href="http://geonode.org" target="_blank">GeoNode</a>, which is designed to be extended and modified by different software developers. Whenever an open-source platform is customized in this way, it is called an instance &mdash; NJcoast is a customized instance of the GeoNode open-source CMS. Other unique GeoNode instances have been developed by hundreds of organizations, including the <a href="" target="_blank">World Bank</a>, <a href="" target="_blank">United Nations</a>, <a href="" target="_blank">European Union</a> and <a href="" target="_blank">US State Department</a>, to support a wide variety of projects that include response to natural disasters and humanitarian aid efforts.</p>
+        </div>
+      </div>
+      <div class="row spaced" >
+        <div class="col-sm-2">
+          <img class="img-responsive reduce-on-mobile" src="{{ STATIC_URL }}images/graphic_gis-for-all.png" />
+        </div>
+        <div class="col-sm-10">
+          <h4>Geospatial data for all</h4>
+          <p>With GeoNode under the hood, NJcoast enables users with little to no formal training in GIS to query, visualize, annotate and share geospatial data across teams and agencies. Specifically, users can:</p>
+          <ul>
+            <li>Upload geospatial data through a simplified interface, using a  web form to supply metadata</li>
+            <li>Share data publicly or allow access to only specific users</li>
+            <li>Search for data housed on NJcoast geographically or by entering keywords</li>
+            <li>Create custom maps, including projections onto popular base layers like Open Street Map, Google Satellite or Bing layers</li>
+            <li>Annotate maps with notes and markings</li>
+            <li>Share custom maps with fellow users, or print as PDF</li>
+            <li>Export GIS layers created in NJcoast to other software, such as ArcGIS</li>
+            <li>Build community around geospatial data using social features, including commenting and rating systems</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row spaced" >
+        <div class="col-sm-2">
+          <img class="img-responsive reduce-on-mobile" src="{{ STATIC_URL }}images/graphic_customized-by-role.png" />
+        </div>
+        <div class="col-sm-10">
+          <h4>Customized display</h4>
+          <p>Leveraging GeoNode's capabilities, NJcoast customizes a user's view based on his or her role. Informed by pilot studies, three primary roles have been established: (1) planners and service delivery (including engineering and public works), (2) emergency managers and (3) first responders. Users in each role interact with a customized display, pre-populated with the GIS layers most relevent to their duties.</p>
+        </div>
+      </div>
+
+<a id="shp-tool"></a>
+
+      <div class="row" >
+        <div class="col-sm-2">
+          <img class="img-responsive reduce-on-mobile" src="{{ STATIC_URL }}images/graphic_cloud-based.png" />
+        </div>
+        <div class="col-sm-10">
+          <h4>Cloud-based</h4>
+          <p>NJcoast is hosted on a cloud server, which ensures redundancy, particularly during a landfalling storm. These cloud servers host all of the software associated with the NJcoast GeoNode instance. NJcoast does not store geospatial data sets, as these are dynamic and continually evolving. Instead, NJcoast links to them, allowing the data to reside in its original home where it can be maintained and continually updated by the owner, according to established and evolving workflows within that state, county or municipal authority. In this way, NJcoast enables users to access up-to-date, diverse geospatial data from multiple sources using a single interface.</p>
+        </div>
+      </div>
+
+    </div><!-- close container -->
+
+    <div class="gray-zone-symmetric" style="margin-top: 50px; margin-bottom: 50px">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10">
+          <h2>Storm Hazard Projection Tool</h2>
+           <p class="larger">Over time, NJcoast will build out a variety of custom toolsets to further enrich the ability to generate geospatial data or execute geospatial data analyses. The first of these toolsets is the Storm Hazard Projection (SHP) Tool.</p>
+        </div>
+        <div class="col-sm-2">
+          <img class="img-responsive reduce-on-mobile" src="{{ STATIC_URL }}images/graphic_custom-tools.png" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-7">
+         <p><b>Purpose:</b> Evaluate exposure to natural hazards like strong winds, waves and surge (based on topography and bathymetry at a given location) for specific user-defined scenarios.</p>
+          <p><b>Use Cases:</b> (1) Emergency management during landfalling storms; (2) planning activities such as risk assessments or Floodplain Management Plans.</p>
+
+          <p><b>Challenge:</b> Static visualizations of projected flood hazards, the current state-of-the-art in New Jersey, do not allow municipalities to evaluate specific scenarios for planning and situational awareness applications; models used to create these static visualizations, like DFIRMs, are themselves are too complex and computationally demanding to be run by non-experts on standard desktop computers (on the order of thousands of hours of computations).</p>
+
+          <p><b>Response:</b> NJcoast will develop a pair of computational models &mdash; one for nor’easters and one for hurricanes &mdash; using a technique called surrogate modeling (see inset panel). Surrogate models allow any arbitrary storm to be simulated based on inputting a handful of common storm parameters. In minutes, these computational models produce a geospatial layer visualizing the expected storm surge, including projections of “worst case scenarios” given uncertainties in the track prior to landfall. These same parameters are also fed to a highly efficient wind field model that generates a second geospatial layer mapping site-specific wind speeds anticipated during the storm.</p>
+
+          <p><b>Enhancements:</b> The surrogate model is based upon the data generated by the Army Corps of Engineers North Atlantic Coast Comprehensive Study (NACCS). This database is being enhanced with wave run-up simulations at specific transects along the New Jersey coast. This captures the interaction of the waves with the current level of coastal protection and can allow users to explore the impact of degraded or breached dune systems. The wave-run up simulations (for current level of coastal protection) are being included for the Sandy-affected counties of Cape May, Atlantic, Middlesex, Monmouth, Essex, Hudson, Union and Ocean; additional degraded/breached simulations will be available for the pilot communities in Keansburg and Berkeley. The wind model similarly evaluates land use/land cover patterns to simulate specific wind speeds based on topography.</p>
+
+          <p><b>User Options:</b> Using the NJcoast interface, users can choose a Nor’easter or hurricane simulation (for specific storm track parameters), as well as elevated sea level, tidal scenario, coastal protection level (full, degraded, breached).</p> 
+
+          <p><b>Custom Mode:</b> During a landfalling storm, NJcoast periodically refreshes to execute the SHP tool with parameters from the latest storm track reported from the National Hurricane Center, and visualizes the resulting geospatial layer with predicted tides at time of landfall.</p>
+          <p><b>Get Started:</b> To use the SHP Tool, you will need to <a href="">request a user account</a>.</p>
+        </div>
+        <div class="col-sm-5">
+        <div class="well well-reverse">
+          <h4>What is a surrogate model?</h4>
+          <p>A <i>surrogate model</i> is basically a highly sophisticated interpolation approach. The Army Corps of engineers regularly conducts studies of US hurricane zones. Most relevant to New Jersey is their North Atlantic Coast Comprehensive Study (NACCS) during which the Corps ran over 1000 synthetic storm tracks and 100 historical storm tracks, for hurricanes and nor’easters in this region. Their simulations used the ADCIRC model co-developed at Notre Dame for the surge, coupled with a second model called STWAVE that simulates the waves offshore. The NACCS also considers the effects of nearly 100 random tide scenarios and a 1 m sea level rise. This results in a massive database of hurricane storm surge predictions all along the coast for each of these storm tracks, under different tidal and sea level scenarios. That’s where the surrogate model comes along.</p>
+          <p>It turns out that storm tracks are easily described by a handful of common parameters, like landfall location, track heading and central pressure. These are used to calibrate a surrogate model against the Army Corps NACCS database. Once the surrogate model is tuned to the database, it can be used to simulate any arbitrary storm simply by inputting the desired values of these parameters, even if those parameters do not exactly yield one of the tracks in the original NACCS database.</p>
+          <p>Because of its efficiency, the surrogate model is even able to evaluate the uncertainty in the storm track. Since storms can shift considerably in the days and hours leading up to landfall, the surrogate model takes the user’s inputs and determines the different ways that track could deviate prior to landfall to show the user the uncertainty in the storm track and an estimate of worst case storm surge scenario.</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+{% endblock %}

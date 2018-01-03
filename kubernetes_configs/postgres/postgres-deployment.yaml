@@ -8,6 +8,7 @@ spec:
   template:
     metadata:
       labels:
+        app: postgres
         io.kompose.service: postgres
     spec:
       containers:
@@ -15,7 +16,6 @@ spec:
         name: postgres
         ports:
           - containerPort: 5432
-            name: postgres
         volumeMounts:
           - name: postgres-persistent-storage
             mountPath: /var/lib/postgresql/data
