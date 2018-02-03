@@ -1,0 +1,3 @@
+[submodule "njcoast"]
+	path = njcoast
+	url = https://github.com/ecaldwe1/cyberspatial-ui.git
